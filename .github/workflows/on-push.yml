@@ -1,6 +1,9 @@
-name: Node.js CI
+name: CI Tests Except Master
 
-on: [push]
+on:
+  push:
+    branches:
+      - '!master'
 
 jobs:
   test-on-ubuntu:
