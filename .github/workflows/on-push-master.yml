@@ -5,11 +5,11 @@ on:
     branches:
       - "master"
 
-stages:
-  - test
-  - package      
-
 jobs:
+  stages:
+    - test
+    - bump
+
   test-on-ubuntu:
     stage: test
 

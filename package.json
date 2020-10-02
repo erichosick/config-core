@@ -16,6 +16,17 @@
     "README.md"
   ],
   "license": "MIT",
+  "keywords": [
+    "configuration",
+    "settings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichosick/config-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erichosick/config-core/issues"
+  },
   "scripts": {
     "lint": "prettier --check '**/*.*' && eslint .",
     "test": "nyc mocha",
