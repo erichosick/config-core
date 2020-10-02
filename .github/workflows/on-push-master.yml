@@ -1,0 +1,57 @@
+name: "Bump Version On Push To Master"
+
+on:
+  push:
+    branches:
+      - "master"
+
+stages:
+  - test
+  - package      
+
+jobs:
+  test-on-ubuntu:
+    stage: test
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: yarn
+    - run: yarn test
+      env:
+        CI: true
+
+  bump-version:
+    stage: bump
+
+    name: "Bump Version on master"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2"
+        with:
+          ref: ${{ github.ref }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 12
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: ''
+          minor-wording:  'add,Adds,new'
+          major-wording:  'MAJOR-VERSION'
+      - name: "cat package.json"
+        run: cat ./package.json
