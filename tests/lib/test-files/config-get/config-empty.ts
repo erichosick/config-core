@@ -1,0 +1,1 @@
+/* Empty configuration file should still work */

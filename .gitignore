@@ -1,0 +1,9 @@
+# dependencies
+/node_modules/
+
+# test outputs
+.nyc_output
+
+# misc
+.DS_Store
+/dist/

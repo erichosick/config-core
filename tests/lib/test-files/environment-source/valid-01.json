@@ -1,0 +1,5 @@
+{
+  "_env": {
+    "CONFIG_COMPUTE": "restApi"
+  }
+}
