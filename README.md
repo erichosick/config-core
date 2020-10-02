@@ -1,6 +1,6 @@
-# config-core [![GitHub license](https://img.shields.io/github/license/config-core/config-core?style=flat)](https://github.com/config-core/config-core/blob/master/LICENSE) [![Tests](https://github.com/config-core/config-core/workflows/CI/badge.svg)](https://github.com/config-core/config-core/actions) [![codecov](https://codecov.io/gh/config-core/config-core/branch/master/graph/badge.svg)](https://codecov.io/gh/config-core/config-core) ![npm](https://img.shields.io/npm/v/config-core) [![minizipped size](https://badgen.net/bundlephobia/minzip/config-core)](https://bundlephobia.com/result?p=config-core)
+# config-core [![GitHub license](https://img.shields.io/github/license/config-core/config-core?style=flat)]
 
-config-core is A feature-rich but straightforward multi-source hierarchical configuration and settings solution. Its features include:
+config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution. Its features include:
 
 - Very small footprint and core library has no dependencies
 - Simple Loading of Configuration Logic
