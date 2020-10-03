@@ -1,6 +1,6 @@
 {
   "name": "config-core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A feature-rich but straightforward multi-source hierarchical configuration and settings solution.",
   "author": {
     "name": "Eric Hosick",
