@@ -26,13 +26,13 @@ export class FileSource implements IConfigSource {
   /**
    * Returns file extension from an absolute path to the file.
    * @param fileAbsolutePath Absolute path to file.
+   *
+   * @throws An error if file extension is not provided or file name is invalid.
    */
   private static _fileExtension(fileAbsolutePath: string): string {
     const fnSplit = fileAbsolutePath.split('.');
     if (fnSplit.length <= 1) {
-      throw new Error(
-        `File '${fileAbsolutePath}' is not a valid or is missing a file extension`,
-      );
+      throw new Error(`File '${fileAbsolutePath}' is not a valid or is missing a file extension`);
     }
     return fnSplit[fnSplit.length - 1].toLowerCase();
   }
@@ -42,10 +42,16 @@ export class FileSource implements IConfigSource {
    *
    * @Returns Return, upon promise resolution (await), an ISourceType containing
    * the configuration data.
+   *
    */
   public async loadConfig(): Promise<ISourceType> {
-    return new Promise<ISourceType>((resolve) => {
-      const fileExtension = FileSource._fileExtension(this.#fileAbsolutePath);
+    return new Promise<ISourceType>((resolve, reject) => {
+      let fileExtension;
+      try {
+        fileExtension = FileSource._fileExtension(this.#fileAbsolutePath);
+      } catch (exception) {
+        reject(exception);
+      }
       const description = `file: ${this.#fileAbsolutePath}`;
       let data;
 
@@ -58,7 +64,7 @@ export class FileSource implements IConfigSource {
             try {
               data = JSON.parse(bufferData);
             } catch (err) {
-              throw new Error(`${this.#fileAbsolutePath}: ${err.message}`);
+              reject(Error(`${this.#fileAbsolutePath}: ${err.message}`));
             }
           }
           break;
@@ -66,16 +72,18 @@ export class FileSource implements IConfigSource {
           const fsData = require(this.#fileAbsolutePath);
           const numOfProperties = Object.keys(fsData).length;
           if (numOfProperties > 1) {
-            throw new Error(
-              `The typescript config file '${
-                this.#fileAbsolutePath
-              }' must contain no more than one export`,
+            reject(
+              Error(
+                `The typescript config file '${
+                  this.#fileAbsolutePath
+                }' must contain no more than one export`,
+              ),
             );
           }
           data = numOfProperties === 0 ? {} : fsData[Object.keys(fsData)[0]];
           break;
         default:
-          throw new Error(`File extension '${fileExtension}' not supported`);
+          reject(Error(`File extension '${fileExtension}' not supported`));
       }
 
       if (this.#rootOffset !== '') {

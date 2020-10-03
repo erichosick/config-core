@@ -35,6 +35,7 @@ export class Config {
     if (null === lowerPrecidence || undefined === lowerPrecidence) {
       return upperPrecidence;
     } else if (null === upperPrecidence || undefined === upperPrecidence) {
+      // TODO: Find a test case for this line of code.
       return lowerPrecidence;
     } else if (isLowerObj && isUpperObj) {
       return { ...lowerPrecidence, ...upperPrecidence };
@@ -89,6 +90,9 @@ export class Config {
 
   /**
    * Validates and returns the current configuration environment.
+   *
+   * @throws An error if one of the required configuration environment
+   * variables are missing (CONFIG_PLATFORM, CONFIG_COMPUTE, NODE_ENV)
    */
   public getConfigEnvironment(): IConfigEnvironment {
     const env = {
