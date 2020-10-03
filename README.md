@@ -109,7 +109,7 @@ import { config, EnvironmentSource, FileSource, SSMParameterStoreSource } from '
   // configuration sources before using config (but not necessary).
   await config.addSource(new SSMParameterStoreSource());
 
-  if (config.env('dev')) {
+  if (config.env('NODE_ENV') === 'dev') {
     // Provide a place for developers to override configuration values
     await config.addSource(new FileSource(`./settings/dev-override.yaml`));
   }
