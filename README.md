@@ -1,4 +1,6 @@
-# config-core [![GitHub license](https://img.shields.io/github/license/config-core/config-core?style=flat)]
+# config-core
+
+[![GitHub license](https://img.shields.io/github/license/erichosick/config-core?style=flat)](https://github.com/erichosick/config-core/blob/master/LICENSE) ![npm](https://img.shields.io/npm/v/config-core) [![codecov](https://codecov.io/gh/erichosick/config-core/branch/master/graph/badge.svg)](https://codecov.io/gh/erichosick/config-core)
 
 config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution. Its features include:
 

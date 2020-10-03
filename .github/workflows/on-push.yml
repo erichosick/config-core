@@ -25,3 +25,10 @@ jobs:
       env:
         CI: true
 
+    # Create key here https://codecov.io
+    # Add CODECOV_TOKEN to Github Secret here: https://github.com/${organization}/${repository}/settings/secrets
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+  

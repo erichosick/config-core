@@ -31,7 +31,8 @@
     "lint": "prettier --check '**/*.*' && eslint .",
     "test": "nyc mocha",
     "build": "tsc",
-    "test/watch": "mocha --watch"
+    "test/watch": "mocha --watch",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "prettier": {
     "docs": "https://prettier.io/docs/en/options.html",
@@ -48,6 +49,7 @@
     "@types/node": "^14.11.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "codecov": "^3.7.2",
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",

@@ -3,6 +3,8 @@
 
 # test outputs
 .nyc_output
+/coverage/
+coverage.lcov
 
 # misc
 .DS_Store
