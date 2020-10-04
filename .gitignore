@@ -1,5 +1,7 @@
 # dependencies
-/node_modules/
+**/node_modules/
+/examples/**/yarn.lock
+/examples/**/*.log
 
 # test outputs
 .nyc_output
