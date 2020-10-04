@@ -28,6 +28,9 @@ config-core is a feature-rich but straightforward multi-source hierarchical conf
 
 ## Example Usage
 
+- [Javascript Example](./examples/javascript/README.md) in `./examples/javascript`.
+- [Typescript Example](./examples/typescript/README.md) in `./examples/typescript`.
+
 Setup config environment: `CONFIG_PLATFORM`, `CONFIG_COMPUTE` and `NODE_ENV`.
 
 Example:
