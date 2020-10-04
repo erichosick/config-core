@@ -14,6 +14,7 @@ config-core is a feature-rich but straightforward multi-source hierarchical conf
 - Multiple configuration sources: each one used multiple times:
   - EnvironmentSource (shell environment values) in this repository.
   - FileSource (.json, .js, and .ts) in this repository.
+    - NOTE: .ts config file types are only available in typescript projects.
   - FileYamlSource (.yaml) in [config-source-yaml](TODO) repository. TODO: Maybe be part of this repo: monolith repository.
   - FileIniSource (.ini) in [config-source-ini](TODO) repository. TODO: Maybe be part of this repo: monolith repository.
   - SsmParamSource ([AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)) in [config-source-ssm-param](TODO).
@@ -27,43 +28,54 @@ config-core is a feature-rich but straightforward multi-source hierarchical conf
 
 ## Example Usage
 
-Setup your environment for `CONFIG_PLATFORM`, `CONFIG_COMPUTE` and `NODE_ENV`.
+Setup config environment: `CONFIG_PLATFORM`, `CONFIG_COMPUTE` and `NODE_ENV`.
 
 Example:
 
 ```bash
-export CONFIG_PLATFORM='specialCrm' # product name
-export CONFIG_COMPUTE='restApi' # service/compute/lambda name
+# Minimum shell environment variable setting
 export NODE_ENV='dev' # execution environment/instance (dev, stage, prod, etc.)
 ```
 
-Create a configuration file `config.json` (this example uses json):
+Place other environment variables in `_env` scope.
 
 ```json
-// config.json
+// settings-env.json
 {
-  "specialCrm": {
-    "restApi": {
-      "_shared": {
-        "db": {
-          "user": "admin"
-        }
+  "_env": {
+    "CONFIG_PLATFORM": "specialCrm",
+    "CONFIG_COMPUTE": "restApi",
+  },
+};
+```
+
+Create a configuration file `config.ts` (this example uses typescript):
+
+```typescript
+// config.ts
+export const settings = {
+  specialCrm: {
+    restApi: {
+      _shared: {
+        db: {
+          user: 'admin',
+        },
       },
-      "dev": {
-        "db": {
-          "port": 3005,
-          "host": "localhost"
-        }
+      dev: {
+        db: {
+          port: 3005,
+          host: 'localhost',
+        },
       },
-      "stage": {
-        "db": {
-          "port": 5432,
-          "host": "db.company.com"
-        }
-      }
-    }
-  }
-}
+      stage: {
+        db: {
+          port: 5432,
+          host: 'db.company.com',
+        },
+      },
+    },
+  },
+};
 ```
 
 and use a second file that happens to be a YAML `config.yaml`:
@@ -93,11 +105,12 @@ import { config, EnvironmentSource, FileSource, SSMParameterStoreSource } from '
   // `const config = new Config();` if the singleton pattern
   // isn't your thing.
 
-  // Optionally load all shell environment variables.
+  // Load all shell and file environment variables.
   await config.addSource(new EnvironmentSource());
+  await config.addSource(new FileSource(`./settings/settings-env.json`));
 
   // Config can live in multiple files and file types.
-  await config.addSource(new FileSource(`./settings/config.json`));
+  await config.addSource(new FileSource(`./settings/config.ts`));
   await config.addSource(new FileSource(`./settings/config.yaml`));
 
   // Good idea to configure logging as soon as possible.
@@ -177,7 +190,21 @@ There are (currently) only three environment variables you should ever need to s
 
 - **CONFIG_PLATFORM**: product or company name. Example `specialCrm`.
 - **CONFIG_COMPUTE**: compute instance (service/app/lambda) name. Examples `restApi` are `authLambda`.
-- **NODE_ENV**: execution environment or instance. Examples are `dev`, `stage`, `prod`, `myenv`, etc.
+- **NODE_ENV**: execution environment or instance. Always a shell environment value. Examples are `dev`, `stage`, `prod`, `myenv`, etc.
+
+It is recommended to always define `NODE_ENV` as an shell environment variable. `CONFIG_PLATFORM` and `CONFIG_COMPUTE` can be defined in a configuration file under the `_env` scope.
+
+Example:
+
+```json
+// settings-env.json
+{
+  "_env": {
+    "CONFIG_PLATFORM": "${platform_name}",
+    "CONFIG_COMPUTE": "${compute_name}",
+  },
+};
+```
 
 ## Configuration Values Context
 
