@@ -34,10 +34,14 @@ export class Config {
 
     if (null === lowerPrecidence || undefined === lowerPrecidence) {
       return upperPrecidence;
-    } else if (null === upperPrecidence || undefined === upperPrecidence) {
-      // TODO: Find a test case for this line of code.
-      return lowerPrecidence;
-    } else if (isLowerObj && isUpperObj) {
+    }
+    // NOTE: For our usage of merge, there is never a case where the
+    //       upperPrecidence is null but the lower one is not (so far). This
+    //       case has been considered and found not necessary
+    //  else if (null === upperPrecidence || undefined === upperPrecidence) {
+    //   return lowerPrecidence;
+    // }
+    else if (isLowerObj && isUpperObj) {
       return { ...lowerPrecidence, ...upperPrecidence };
     } else if (isLowerObj || isUpperObj) {
       throw new Error(
@@ -62,11 +66,15 @@ export class Config {
    * @param source - A configuration source (File, Environment, Http etc.)
    */
   public async addSource(source: IConfigSource): Promise<void> {
-    return new Promise<void>(async (resolve) => {
-      const sourceType = await source.loadConfig();
-      sourceType.priority = this.#priority;
-      this.#priority += 10;
-      this.#sources.push(sourceType);
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        const sourceType = await source.loadConfig();
+        sourceType.priority = this.#priority;
+        this.#priority += 10;
+        this.#sources.push(sourceType);
+      } catch (error) {
+        reject(error);
+      }
       resolve();
     });
   }

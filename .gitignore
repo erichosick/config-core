@@ -6,5 +6,8 @@
 /coverage/
 coverage.lcov
 
+# build output
+/dist/
+
 # misc
 .DS_Store

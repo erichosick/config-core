@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/erichosick/config-core?style=flat)](https://github.com/erichosick/config-core/blob/master/LICENSE) ![npm](https://img.shields.io/npm/v/config-core) [![codecov](https://codecov.io/gh/erichosick/config-core/branch/master/graph/badge.svg)](https://codecov.io/gh/erichosick/config-core)
 
-config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution. Its features include:
+config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution. Features included are:
 
 - Very small footprint and core library has no dependencies
 - Simple Loading of Configuration Logic

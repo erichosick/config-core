@@ -6,7 +6,7 @@ const expect = chai.expect;
 chai.use(chaiAsPromised);
 
 describe('filesource', () => {
-  it(' should expose library correctly', () => {
+  it('should expose library correctly', () => {
     expect(FileSource, 'should be a function').to.be.a('function');
   });
 

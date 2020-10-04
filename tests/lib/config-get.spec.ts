@@ -3,11 +3,24 @@ import { expect } from 'chai';
 import { Config, EnvironmentSource, FileSource } from '../../lib/index';
 
 describe('configuration get', async () => {
+  describe('reading invalid files', () => {
+    it('should exception when a file does not exist', async () => {
+      let config = new Config();
+      let fileName = `${__dirname}/test-files/config-get/no-such-file-01.ts`;
+
+      await expect(config.addSource(new FileSource(fileName))).to.be.rejectedWith(
+        `Cannot find module '${fileName}'`,
+      );
+    });
+  });
+
   describe('config get missing environment', async () => {
     let config = new Config();
     await config.addSource(new EnvironmentSource());
 
     it('should exception when the environment is not setup correctly', () => {
+      // Note: Might look like we have extra tests here, but we need to
+      // consider all the possible "branches" to get 100% on branch testing.
       // Clean out environment variables for test
       delete process.env['CONFIG_PLATFORM'];
       delete process.env['CONFIG_COMPUTE'];
@@ -21,6 +34,23 @@ describe('configuration get', async () => {
       process.env['CONFIG_PLATFORM'] = 'set';
       expect(() => config.get('anyvalue')).to.throw(
         'Missing required environment variables: CONFIG_COMPUTE, NODE_ENV',
+      );
+
+      // Mock an environment variable being set
+      process.env['CONFIG_COMPUTE'] = 'set';
+      expect(() => config.get('anyvalue')).to.throw(
+        'Missing required environment variables: NODE_ENV',
+      );
+
+      // Cleanup test
+      delete process.env['CONFIG_PLATFORM'];
+      delete process.env['CONFIG_COMPUTE'];
+      delete process.env['NODE_ENV'];
+
+      // Mock an environment variable being set
+      process.env['NODE_ENV'] = 'set';
+      expect(() => config.get('anyvalue')).to.throw(
+        'Missing required environment variables: CONFIG_PLATFORM, CONFIG_COMPUTE',
       );
 
       // Cleanup test

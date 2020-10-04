@@ -31,7 +31,8 @@
     "test": "nyc mocha",
     "build": "tsc",
     "test/watch": "mocha --watch",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "report-coverage/html": "nyc report --reporter html"
   },
   "prettier": {
     "docs": "https://prettier.io/docs/en/options.html",

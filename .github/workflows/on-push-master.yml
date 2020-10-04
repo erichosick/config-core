@@ -48,7 +48,7 @@ jobs:
         uses: "phips28/gh-action-bump-version@master"
         with:
           tag-prefix: ''
-          minor-wording:  'add,Adds,new'
+          minor-wording:  'FEATURE'
           major-wording:  'MAJOR-VERSION'
       - name: "cat package.json"
         run: cat ./package.json
