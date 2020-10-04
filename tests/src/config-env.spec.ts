@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Config, EnvironmentSource, FileSource } from '../../lib/index';
+import { Config, EnvironmentSource, FileSource } from '../../src/index';
 
 describe('configuration environment', async () => {
   let config = new Config();

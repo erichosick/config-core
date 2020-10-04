@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Config, config, EnvironmentSource } from '../../lib/index';
+import { Config, config, EnvironmentSource } from '../../src/index';
 
 describe('configuration', () => {
   it('should expose library correctly', () => {

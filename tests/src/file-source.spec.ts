@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { FileSource } from '../../lib/index';
+import { FileSource } from '../../src/index';
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -49,7 +49,7 @@ describe('filesource', () => {
         `${__dirname}/test-files/file-source/valid-01.json`,
       ).loadConfig();
       expect(sourceType.description, 'should have correct description').to.contain(
-        'tests/lib/test-files/file-source/valid-01.json',
+        'tests/src/test-files/file-source/valid-01.json',
       );
       expect(sourceType.data, 'should have correct data loaded from file').to.deep.equal({
         test: 'valid-01.json',
@@ -78,7 +78,7 @@ describe('filesource', () => {
         `${__dirname}/test-files/file-source/valid-01.ts`,
       ).loadConfig();
       expect(sourceType.description, 'should have correct description').to.contain(
-        'tests/lib/test-files/file-source/valid-01.ts',
+        'tests/src/test-files/file-source/valid-01.ts',
       );
       expect(sourceType.data, 'should have correct data loaded from file').to.deep.equal({
         test: 'valid-01.ts',

@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { EnvironmentSource } from '../../lib/index';
+import { EnvironmentSource } from '../../src/index';
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);

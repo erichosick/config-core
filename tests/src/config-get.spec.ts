@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { Config, EnvironmentSource, FileSource } from '../../lib/index';
+import { Config, EnvironmentSource, FileSource } from '../../src/index';
 
 describe('configuration get', async () => {
   describe('reading invalid files', () => {
