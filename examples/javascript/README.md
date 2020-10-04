@@ -1,10 +1,11 @@
 # core-config Example - Javascript
 
-This directory contains examples of using core-config in a javascript environment.
+An example of using `core-config` with javascript.
 
 To run the example:
 
 ```shell
+$ cd examples/javascript
 $ yarn
 $ node example.js
 ```

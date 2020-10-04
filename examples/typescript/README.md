@@ -1,10 +1,11 @@
 # core-config Example - Typescript
 
-This directory contains examples of using core-config in a typescript environment.
+An example of using `core-config` with typescript.
 
 To run the example:
 
 ```shell
+$ cd examples/typescript
 $ yarn
 $ npx ts-node example.ts
 ```
