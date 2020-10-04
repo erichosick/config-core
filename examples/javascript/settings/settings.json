@@ -1,0 +1,73 @@
+{
+  "_shared": {
+    "_shared": {
+      "_shared": {
+        "databases": {
+          "userDb": {
+            "write": {
+              "database": "userdb",
+              "host": "localhost",
+              "port": 5432,
+              "user": "admin",
+              "idleTimeoutMillis": 1000,
+              "connectionTimeoutMillis": 1000,
+              "min": 4,
+              "max": 20,
+              "ssl": false
+            }
+          }
+        },
+        "dev": {
+          "databases": {
+            "userDb": {
+              "write": {
+                "port": 3009,
+                "password": "dev-password"
+              }
+            }
+          }
+        },
+        "stage": {
+          "databases": {
+            "userDb": {
+              "write": {
+                "host": "userdb-stage.company.com"
+              }
+            }
+          }
+        },
+        "prod": {
+          "databases": {
+            "userDb": {
+              "write": {
+                "host": "userdb-prod.company.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "specialCrm": {
+    "restApi": {
+      "_shared": {
+        "service": {
+          "name": "Special CRM Rest API",
+          "port": 443
+        },
+        "logging": {
+          "fileName": "combined.log",
+          "level": "debug"
+        }
+      },
+      "dev": {
+        "service": {
+          "port": 3010
+        },
+        "logging": {
+          "level": "info"
+        }
+      }
+    }
+  }
+}

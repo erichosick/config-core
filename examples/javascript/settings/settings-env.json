@@ -1,0 +1,8 @@
+{
+  "_env": {
+    "CONFIG_PLATFORM": "specialCrm",
+    "CONFIG_COMPUTE": "restApi",
+    "NODE_ENV": "dev",
+    "NODE_ENV_DOC": "NODE_ENV settings is here only for the example."
+  }
+}
