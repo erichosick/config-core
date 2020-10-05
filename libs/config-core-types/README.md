@@ -2,6 +2,6 @@
 
 Contains typescript type definitions for [config-core](https://www.github.com/erichosick/config-core).
 
-![npm](https://img.shields.io/npm/v/config-core-types)
+![npm](https://img.shields.io/npm/v/@ehosick/config-core-types)
 
 [![codecov](https://codecov.io/gh/erichosick/config-core/branch/master/graph/badge.svg)](https://codecov.io/gh/erichosick/config-core)

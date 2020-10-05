@@ -1,6 +1,6 @@
 {
   "name": "@ehosick/config-core-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript definitions for the config-core library.",
   "author": {
     "name": "Eric Hosick",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erichosick/config-core.git/libs/config-core-types"
+    "url": "https://github.com/erichosick/config-core/tree/master/libs/config-core-types"
   },
   "bugs": {
     "url": "https://github.com/erichosick/config-core/issues"
