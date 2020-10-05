@@ -60,13 +60,14 @@ jobs:
 
       - name: "Automated Version Bump config-core-types"
         uses: "phips28/gh-action-bump-version@master"
+        env:
+          PACKAGEJSON_DIR: ./libs/config-core-types
         with:
-          working-directory: ./libs/config-core-types
           tag-prefix: ''
           minor-wording:  'FEATURE'
           major-wording:  'MAJOR-VERSION'
       - name: "cat package.json"
-        run: cat ./package.json
+        run: cat ./libs/config-core-types/package.json
 
 
   # Generate NPM_TOKEN: https://www.npmjs.com/settings/erichosick/tokens
