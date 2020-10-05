@@ -5,6 +5,8 @@ on:
     branches:
       - "master"
 
+
+      
 jobs:
   test-on-ubuntu:
     runs-on: ubuntu-latest
@@ -55,6 +57,17 @@ jobs:
           major-wording:  'MAJOR-VERSION'
       - name: "cat package.json"
         run: cat ./package.json
+
+      - name: "Automated Version Bump config-core-types"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          working-directory: ./libs/config-core-types
+          tag-prefix: ''
+          minor-wording:  'FEATURE'
+          major-wording:  'MAJOR-VERSION'
+      - name: "cat package.json"
+        run: cat ./package.json
+          working-directory: ./libs/config-core-types
 
   # Generate NPM_TOKEN: https://www.npmjs.com/settings/erichosick/tokens
   # Add NPM_TOKEN to Github Secret here: https://github.com/${organization}/${repository}/settings/secrets
