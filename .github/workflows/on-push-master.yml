@@ -67,7 +67,7 @@ jobs:
           major-wording:  'MAJOR-VERSION'
       - name: "cat package.json"
         run: cat ./package.json
-          working-directory: ./libs/config-core-types
+
 
   # Generate NPM_TOKEN: https://www.npmjs.com/settings/erichosick/tokens
   # Add NPM_TOKEN to Github Secret here: https://github.com/${organization}/${repository}/settings/secrets
