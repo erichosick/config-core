@@ -1,15 +1,15 @@
 # dependencies
 **/node_modules/
-/examples/**/yarn.lock
-/examples/**/*.log
+**/examples/**/yarn.lock
+**/examples/**/*.log
 
 # test outputs
-.nyc_output
-/coverage/
-coverage.lcov
+**/.nyc_output
+**/coverage/
+**/coverage.lcov
 
 # build output
-/dist/
+**/dist/
 
 # misc
-.DS_Store
+**/.DS_Store
