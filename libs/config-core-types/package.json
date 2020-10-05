@@ -1,7 +1,7 @@
 {
-  "name": "@ehosick/config-core",
+  "name": "@ehosick/config-core-types",
   "version": "1.0.0",
-  "description": "A feature-rich but straightforward multi-source hierarchical configuration and settings solution.",
+  "description": "Typescript definitions for the config-core library.",
   "author": {
     "name": "Eric Hosick",
     "email": "erichosick@gmail.com",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erichosick/config-core.git/libs/config-core"
+    "url": "git+https://github.com/erichosick/config-core.git/libs/config-core-types"
   },
   "bugs": {
     "url": "https://github.com/erichosick/config-core/issues"
