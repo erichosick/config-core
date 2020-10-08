@@ -5,10 +5,10 @@ on:
     branches:
       - "master"
 
-
-      
 jobs:
   test-on-ubuntu:
+
+    name: Run tests for entire monorepo.
     runs-on: ubuntu-latest
 
     strategy:
