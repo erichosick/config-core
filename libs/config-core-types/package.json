@@ -1,6 +1,6 @@
 {
   "name": "@ehosick/config-core-types",
-  "version": "1.0.33",
+  "version": "1.0.35",
   "description": "Typescript definitions for the config-core library.",
   "author": {
     "name": "Eric Hosick",
