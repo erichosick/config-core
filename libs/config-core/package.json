@@ -1,6 +1,6 @@
 {
   "name": "@ehosick/config-core",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "A feature-rich but straightforward multi-source hierarchical configuration and settings solution.",
   "author": {
     "name": "Eric Hosick",
@@ -46,6 +46,6 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {
-    "@ehosick/config-core-types": "^1.0.32"
+    "@ehosick/config-core-types": "^1.0.33"
   }
 }
