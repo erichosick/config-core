@@ -13,3 +13,4 @@
 
 # misc
 **/.DS_Store
+**/lerna-debug.log
