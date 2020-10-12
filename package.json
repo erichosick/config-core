@@ -29,7 +29,8 @@
   "scripts": {
     "test": "nyc mocha",
     "build": "tsc",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov"
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov",
+    "version": "git add package.json && lerna version $npm_package_version --amend --no-push --no-git-tag-version --yes && git add -u"
   },
   "prettier": {
     "docs": "https://prettier.io/docs/en/options.html",
