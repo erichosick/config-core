@@ -1,4 +1,4 @@
-import { ISourceType, IConfigSource, IConfigEnvironment } from './types';
+import { ISourceType, IConfigSource, IConfigEnvironment } from '@ehosick/config-core-types';
 
 /**
  * Config is setup to read from multiple sources (using addSource) and then

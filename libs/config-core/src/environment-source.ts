@@ -1,4 +1,4 @@
-import { IConfigSource, ISourceType } from './types';
+import { IConfigSource, ISourceType } from '@ehosick/config-core-types';
 
 /**
  * A configuration source for all shell environment variables placed at the

@@ -1,5 +1,5 @@
 module.exports = {
-  include: ['src/**', 'libs/**/src/**'],
+  include: ['libs/**/src/**'],
   branches: 100,
   functions: 100,
   lines: 100,

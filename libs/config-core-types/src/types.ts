@@ -46,9 +46,3 @@ export interface IConfigEnvironment {
   compute: string;
   environment: string;
 }
-
-export function testMePlease() {
-  if (1 === 2) {
-    let x = 4;
-  }
-}

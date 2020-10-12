@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { IConfigSource, ISourceType } from './types';
+import { IConfigSource, ISourceType } from '@ehosick/config-core-types';
 
 /**
  * FileSource supports loading configuration and settings from a file.
