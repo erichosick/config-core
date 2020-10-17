@@ -2,7 +2,7 @@
   "_env": {
     "CONFIG_PLATFORM": "specialCrm",
     "CONFIG_COMPUTE": "restApi",
-    "NODE_ENV": "dev",
-    "NODE_ENV_DOC": "NODE_ENV settings is here only for the example."
+    "node_env readme": "The NODE_ENV should be set in the shell via export NODE_ENV='dev'. Settings it here only for demo purposes.",
+    "NODE_ENV": "dev"
   }
 }

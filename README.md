@@ -2,29 +2,16 @@
 
 [![GitHub license](https://img.shields.io/github/license/erichosick/config-core?style=flat)](https://github.com/erichosick/config-core/blob/main/LICENSE) ![npm](https://img.shields.io/npm/v/config-core) [![codecov](https://codecov.io/gh/erichosick/config-core/branch/main/graph/badge.svg)](https://codecov.io/gh/erichosick/config-core)
 
-config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution. Features included are:
+config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution.
 
-- Very small footprint and core library has no dependencies
-- Simple Loading of Configuration Logic
-  - No strange edge cases or hard code config file names or file "load order." You decide which files to load and what order to load them in.
-- Minimizing configuration value redundancy by sharing them across:
-  - multiple platforms/company-wide.
+- mix and match multiple configuration sources: [.yaml](https://www.github.com/erichosick/config-source-yaml), [.json, .ts](https://www.github.com/erichosick/config-core), [environment variables](https://www.github.com/erichosick/config-core), TODO [ini](), TODO [AWS Parameter Store]() (see [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)), TODO [REST APIs]()
+- Remove configuration redundancy by sharing configuration values between:
+  - multiple platforms/company
   - shared across multiple compute instances: application, services, lambdas, etc.
-  - shared across multiple environments.
-- Multiple configuration sources: each one used multiple times:
-  - EnvironmentSource (shell environment values) in this repository.
-  - FileSource (.json, .js, and .ts) in this repository.
-    - NOTE: .ts config file types are only available in typescript projects.
-  - FileYamlSource (.yaml) in [config-source-yaml](TODO) repository. TODO: Maybe be part of this repo: monolith repository.
-  - FileIniSource (.ini) in [config-source-ini](TODO) repository. TODO: Maybe be part of this repo: monolith repository.
-  - SsmParamSource ([AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)) in [config-source-ssm-param](TODO).
-  - RestApiSource (RESTful endpoints) in [config-source-restApi](TODO) repository. TODO: Maybe be part of this repo: monolith repository.
-- To support legacy configuration files and sources and provide maximum flexibility, we support:
-  - Using multiple configuration files: the order of precedence of configuration values is based on their loaded order.
-  - Using different types of configuration files (.json, .js, .ts, .yaml, .ini, etc.)
-- TODO: Components can register with config-core and notified when a change to a configuration.
-  - For example, if Infrastructure's CI/CD process updates the location of a database host (or password) in SSM Parameter Store, the changed values are eventually updated in all instances using referencing the configuration allowing the service to update data values without cycling the server.
-  - Updating an instances logging level in SSM Parameter Store will eventually update the logging level of that compute instance, allowing for improved logging for debugging.
+  - shared across multiple environments
+- Unopinionated loading order of Configuration sources: You decide which sources to load and what order to load them in.
+- Support for legacy configuration files.
+- Very small footprint
 
 ## Example Usage
 
