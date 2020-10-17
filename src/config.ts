@@ -8,8 +8,6 @@ import { ISourceType, IConfigSource, IConfigEnvironment } from '@ehosick/config-
 export class Config {
   /* Sources that have been attached to the Config instance */
   #sources: Array<ISourceType> = [];
-  /* The last priority number used when adding a configuration source */
-  #priority: number = 10;
 
   /**
    * Verifies that an item is an object.
@@ -61,7 +59,7 @@ export class Config {
 
   /**
    * AddSource adds a configuration source to the configuration instance by
-   * first loading the configuration (loadConfig()), adding a priority and
+   * first loading the configuration (loadConfig()), and
    * finally pushing it to the sources() Array. See sources().
    * @param source - A configuration source (File, Environment, Http etc.)
    */
@@ -69,8 +67,6 @@ export class Config {
     return new Promise<void>(async (resolve, reject) => {
       try {
         const sourceType = await source.loadConfig();
-        sourceType.priority = this.#priority;
-        this.#priority += 10;
         this.#sources.push(sourceType);
       } catch (error) {
         reject(error);
