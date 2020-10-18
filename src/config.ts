@@ -1,4 +1,4 @@
-import { ISourceType, IConfigSource, IConfigEnvironment } from '@ehosick/config-core-types';
+import { ISourceType, IConfigSource, IConfigContext } from '@ehosick/config-core-types';
 
 /**
  * Config is setup to read from multiple sources (using addSource) and then
@@ -98,7 +98,7 @@ export class Config {
    * @throws An error if one of the required configuration environment
    * variables are missing (CONFIG_PLATFORM, CONFIG_COMPUTE, NODE_ENV)
    */
-  public getConfigEnvironment(): IConfigEnvironment {
+  public getConfigEnvironment(): IConfigContext {
     const env = {
       platform: this.env('CONFIG_PLATFORM'),
       compute: this.env('CONFIG_COMPUTE'),

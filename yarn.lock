@@ -177,10 +177,12 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ehosick/config-core-types@^1.*.*":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ehosick/config-core-types/-/config-core-types-1.1.0.tgz#3f61adad302d1c0058152ccfc833cbda2eea7d9c"
-  integrity sha512-XZomH/lsZAfjLcAVnxr7w3uKXOlbQ4xpUCn0AFaIhej3Q+l2l4ioR7VEBjHDdhbp61ktFLzMCXfoqulC9zWJ7Q==
+"@ehosick/config-core-types@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@ehosick/config-core-types/-/config-core-types-1.1.1.tgz#4e0b3717bf49a1f98a4e90997bca51c70b82e31b"
+  integrity sha512-C3t0YvuA6Jx/mHg+SpeKAF/IC0ZG04P7JN6JwHi+Uk4Fv8u5GIcC/xB9gA7Nrzt6MCCjAObdPmQrOHZOkhJXOQ==
+  dependencies:
+    ts-node "^9.0.0"
 
 "@eslint/eslintrc@^0.1.3":
   version "0.1.3"
