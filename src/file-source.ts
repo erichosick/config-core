@@ -7,8 +7,10 @@ import { IConfigSource, ISourceType } from '@ehosick/config-core-types';
  * Supported file types are: .json, .ts.
  * NOTE: .yml and others will be moved to their own libraries.
  */
+// eslint-disable-next-line import/prefer-default-export
 export class FileSource implements IConfigSource {
   #fileAbsolutePath: string;
+
   #rootOffset: string;
 
   /**
@@ -29,7 +31,7 @@ export class FileSource implements IConfigSource {
    *
    * @throws An error if file extension is not provided or file name is invalid.
    */
-  private static _fileExtension(fileAbsolutePath: string): string {
+  private static fileExtension(fileAbsolutePath: string): string {
     const fnSplit = fileAbsolutePath.split('.');
     if (fnSplit.length <= 1) {
       throw new Error(`File '${fileAbsolutePath}' is not a valid or is missing a file extension`);
@@ -48,7 +50,7 @@ export class FileSource implements IConfigSource {
     return new Promise<ISourceType>((resolve, reject) => {
       let fileExtension;
       try {
-        fileExtension = FileSource._fileExtension(this.#fileAbsolutePath);
+        fileExtension = FileSource.fileExtension(this.#fileAbsolutePath);
       } catch (exception) {
         reject(exception);
       }
@@ -56,7 +58,7 @@ export class FileSource implements IConfigSource {
       let data;
 
       switch (fileExtension) {
-        case 'json':
+        case 'json': {
           const bufferData = fs.readFileSync(this.#fileAbsolutePath, 'utf8');
           if (bufferData.length === 0) {
             data = {};
@@ -68,7 +70,9 @@ export class FileSource implements IConfigSource {
             }
           }
           break;
-        case 'ts':
+        }
+        case 'ts': {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
           const fsData = require(this.#fileAbsolutePath);
           const numOfProperties = Object.keys(fsData).length;
           if (numOfProperties > 1) {
@@ -82,14 +86,15 @@ export class FileSource implements IConfigSource {
           }
           data = numOfProperties === 0 ? {} : fsData[Object.keys(fsData)[0]];
           break;
+        }
         default:
           reject(Error(`File extension '${fileExtension}' not supported`));
       }
 
       if (this.#rootOffset !== '') {
-        let newData = {};
+        const newData = {};
         let curData = newData;
-        let properties = this.#rootOffset.split('.');
+        const properties = this.#rootOffset.split('.');
         properties.forEach((propName, index) => {
           curData[propName] = properties.length === index + 1 ? data : {};
           curData = curData[propName];

@@ -4,14 +4,15 @@
 
 config-core is a feature-rich but straightforward multi-source hierarchical configuration and settings solution.
 
-- mix and match multiple configuration sources: [.yaml](https://www.github.com/erichosick/config-source-yaml), [.json, .ts](https://www.github.com/erichosick/config-core), [environment variables](https://www.github.com/erichosick/config-core), [ini](https://github.com/erichosick/config-source-ini), TODO [AWS Parameter Store]() (see [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)), TODO [REST APIs]()
+- easily manage secrets from your preferred secrets source
+- mix and match multiple configuration sources: [.yaml](https://www.github.com/erichosick/config-source-yaml), [.json, .ts](https://www.github.com/erichosick/config-core), [environment variables](https://www.github.com/erichosick/config-core), [ini](https://github.com/erichosick/config-source-ini), [AWS Parameter Store](https://github.com/erichosick/config-source-parameter-store) (see [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)), TODO [REST APIs]()
 - Remove configuration redundancy by sharing configuration values between:
   - multiple platforms/company
   - shared across multiple compute instances: application, services, lambdas, etc.
   - shared across multiple environments
 - Unopinionated loading order of Configuration sources: You decide which sources to load and what order to load them in.
 - Support for legacy configuration files.
-- Very small footprint
+- Very small footprint.
 
 ## Example Usage
 

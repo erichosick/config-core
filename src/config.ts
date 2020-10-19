@@ -27,10 +27,10 @@ export class Config {
    * the active path we are merging. Used for error handling.
    */
   private static merge(lowerPrecidence: any, upperPrecidence: any, path: string): any {
-    let isLowerObj = Config.isObject(lowerPrecidence);
-    let isUpperObj = Config.isObject(upperPrecidence);
+    const isLowerObj = Config.isObject(lowerPrecidence);
+    const isUpperObj = Config.isObject(upperPrecidence);
 
-    if (null === lowerPrecidence || undefined === lowerPrecidence) {
+    if (lowerPrecidence === null || lowerPrecidence === undefined) {
       return upperPrecidence;
     }
     // NOTE: For our usage of merge, there is never a case where the
@@ -39,9 +39,11 @@ export class Config {
     //  else if (null === upperPrecidence || undefined === upperPrecidence) {
     //   return lowerPrecidence;
     // }
-    else if (isLowerObj && isUpperObj) {
+    if (isLowerObj && isUpperObj) {
       return { ...lowerPrecidence, ...upperPrecidence };
-    } else if (isLowerObj || isUpperObj) {
+    }
+
+    if (isLowerObj || isUpperObj) {
       throw new Error(
         `Property '${path}' resolves to a primitive and an object which can not be merged`,
       );
@@ -64,6 +66,7 @@ export class Config {
    * @param source - A configuration source (File, Environment, Http etc.)
    */
   public async addSource(source: IConfigSource): Promise<void> {
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise<void>(async (resolve, reject) => {
       try {
         const sourceType = await source.loadConfig();
@@ -84,9 +87,12 @@ export class Config {
   public env(key: string): any {
     let result = null;
     this.#sources.forEach((sources: ISourceType) => {
-      if (sources.data.hasOwnProperty('_env')) {
-        let item = sources.data._env;
-        result = item.hasOwnProperty(key) ? Config.merge(result, item[key], key) : result;
+      if (Object.prototype.hasOwnProperty.call(sources.data, '_env')) {
+        // eslint-disable-next-line no-underscore-dangle
+        const item = sources.data._env;
+        result = Object.prototype.hasOwnProperty.call(item, key)
+          ? Config.merge(result, item[key], key)
+          : result;
       }
     });
     return result;
@@ -133,20 +139,21 @@ export class Config {
    */
   public getAbsolute(path: string, property: string, currentConfig: any = undefined): any {
     const properties = path.split('.');
+    let result = currentConfig;
 
     this.sources.forEach((source: ISourceType) => {
       let current = source.data;
       properties.forEach((prop, index) => {
-        if (current.hasOwnProperty(prop)) {
+        if (Object.prototype.hasOwnProperty.call(current, prop)) {
           if (index + 1 === properties.length) {
-            currentConfig = Config.merge(currentConfig, current[prop], property);
+            result = Config.merge(result, current[prop], property);
           } else {
             current = current[prop];
           }
         }
       });
     });
-    return currentConfig;
+    return result;
   }
 
   /**
