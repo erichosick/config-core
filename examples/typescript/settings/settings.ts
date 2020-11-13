@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const settings = {
   _shared: {
     _shared: {
@@ -20,36 +21,36 @@ export const settings = {
             },
           },
         },
-        dev: {
-          databases: {
-            userDb: {
-              write: {
-                // locally, port may need to run on
-                // a different port
-                port: 3009,
-                // ok to commit local dev password
-                password: 'dev-password',
-              },
+      },
+      dev: {
+        databases: {
+          userDb: {
+            write: {
+              // locally, port may need to run on
+              // a different port
+              port: 3009,
+              // ok to commit local dev password
+              password: 'dev-password',
             },
           },
         },
-        stage: {
-          databases: {
-            userDb: {
-              write: {
-                // maybe part of parameter store
-                host: 'userdb-stage.company.com',
-              },
+      },
+      stage: {
+        databases: {
+          userDb: {
+            write: {
+              // maybe part of parameter store
+              host: 'userdb-stage.company.com',
             },
           },
         },
-        prod: {
-          databases: {
-            userDb: {
-              write: {
-                // maybe part of parameter store
-                host: 'userdb-prod.company.com',
-              },
+      },
+      prod: {
+        databases: {
+          userDb: {
+            write: {
+              // maybe part of parameter store
+              host: 'userdb-prod.company.com',
             },
           },
         },

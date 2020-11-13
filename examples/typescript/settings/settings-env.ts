@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const settings = {
   _env: {
     CONFIG_PLATFORM: 'specialCrm',

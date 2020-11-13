@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import winston from 'winston';
 import { config, FileSource } from 'config-core';
 
@@ -9,16 +10,18 @@ import { config, FileSource } from 'config-core';
     // loger not setup yet.
     console.log(e.message);
   }
+  const transports = [];
+  transports.push(new winston.transports.File({ filename: config.get('logging.fileName') }));
+  if (config.env('NODE_ENV') === 'dev') {
+    transports.push(new winston.transports.Console());
+  }
 
-  const transports = [
-    new winston.transports.File({ filename: config.get('logging.fileName') }),
-    config.env('NODE_ENV') === 'dev' ? new winston.transports.Console() : undefined,
-  ];
   const logger = winston.createLogger({
     level: config.get('logging.level'),
-    transports: transports,
+    transports,
   });
 
+  logger.log({ level: 'info', message: config.env('NODE_ENV') });
   logger.log({ level: 'info', message: config.get('databases.userDb.write') });
   logger.log({ level: 'info', message: config.get('service') });
 })();
