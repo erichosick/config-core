@@ -19,6 +19,14 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
+  overrides: [
+    {
+      files: ['*.test.js', '*.spec.js', '*.spec.ts', '*.test.ts'],
+      rules: {
+        'no-unused-expressions': 'off',
+      },
+    },
+  ],
   rules: {
     'no-return-await': 'off', // code readability is better when await is shown with return.
     'import/extensions': [

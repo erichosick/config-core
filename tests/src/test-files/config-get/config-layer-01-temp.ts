@@ -1,4 +1,4 @@
-export const config = {
+export default {
   // For the goldenCRM platform
   goldenCRM: {
     // For all services

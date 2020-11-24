@@ -5,7 +5,7 @@
  *   * Passwords or other credentials
  */
 
-export const config = {
+export default {
   // For all platforms
   _shared: {
     // For all Services

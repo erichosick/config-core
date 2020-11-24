@@ -5,8 +5,8 @@ import { Config, EnvironmentSource, FileSource } from '../../src/index';
 describe('configuration get', async () => {
   describe('reading invalid files', () => {
     it('should exception when a file does not exist', async () => {
-      let config = new Config();
-      let fileName = `${__dirname}/test-files/config-get/no-such-file-01.ts`;
+      const config = new Config();
+      const fileName = `${__dirname}/test-files/config-get/no-such-file-01.ts`;
 
       await expect(config.addSource(new FileSource(fileName))).to.be.rejectedWith(
         `Cannot find module '${fileName}'`,
@@ -15,60 +15,60 @@ describe('configuration get', async () => {
   });
 
   describe('config get missing environment', async () => {
-    let config = new Config();
+    const config = new Config();
     await config.addSource(new EnvironmentSource());
 
     it('should exception when the environment is not setup correctly', () => {
       // Note: Might look like we have extra tests here, but we need to
       // consider all the possible "branches" to get 100% on branch testing.
       // Clean out environment variables for test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
 
       expect(() => config.get('anyvalue')).to.throw(
         'Missing required environment variables: CONFIG_PLATFORM, CONFIG_COMPUTE, NODE_ENV',
       );
 
       // Mock an environment variable being set
-      process.env['CONFIG_PLATFORM'] = 'set';
+      process.env.CONFIG_PLATFORM = 'set';
       expect(() => config.get('anyvalue')).to.throw(
         'Missing required environment variables: CONFIG_COMPUTE, NODE_ENV',
       );
 
       // Mock an environment variable being set
-      process.env['CONFIG_COMPUTE'] = 'set';
+      process.env.CONFIG_COMPUTE = 'set';
       expect(() => config.get('anyvalue')).to.throw(
         'Missing required environment variables: NODE_ENV',
       );
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
 
       // Mock an environment variable being set
-      process.env['NODE_ENV'] = 'set';
+      process.env.NODE_ENV = 'set';
       expect(() => config.get('anyvalue')).to.throw(
         'Missing required environment variables: CONFIG_PLATFORM, CONFIG_COMPUTE',
       );
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
     });
   });
 
   describe('config get object using single file', async () => {
-    let config = new Config();
+    const config = new Config();
     await config.addSource(new EnvironmentSource());
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-layer-01.ts`));
 
     it('should get serviceContext', () => {
-      process.env['CONFIG_PLATFORM'] = 'goldenCRM';
-      process.env['CONFIG_COMPUTE'] = 'userAPI';
-      process.env['NODE_ENV'] = 'dev';
+      process.env.CONFIG_PLATFORM = 'goldenCRM';
+      process.env.CONFIG_COMPUTE = 'userAPI';
+      process.env.NODE_ENV = 'dev';
 
       const serviceContext = config.get('serviceContext');
       expect(serviceContext).to.deep.equal({
@@ -92,23 +92,23 @@ describe('configuration get', async () => {
       });
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
     });
   });
 
   describe('config get object using multiple files', async () => {
-    let config = new Config();
+    const config = new Config();
     await config.addSource(new EnvironmentSource());
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-layer-01.ts`));
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-empty.ts`));
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-layer-02.ts`));
 
     it('should get serviceContext', () => {
-      process.env['CONFIG_PLATFORM'] = 'goldenCRM';
-      process.env['CONFIG_COMPUTE'] = 'userAPI';
-      process.env['NODE_ENV'] = 'dev';
+      process.env.CONFIG_PLATFORM = 'goldenCRM';
+      process.env.CONFIG_COMPUTE = 'userAPI';
+      process.env.NODE_ENV = 'dev';
 
       const serviceContext = config.get('serviceContext');
       expect(serviceContext).to.deep.equal({
@@ -144,48 +144,47 @@ describe('configuration get', async () => {
       });
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
     });
 
     it('should exception when trying to merge a property and an object', () => {
-      process.env['CONFIG_PLATFORM'] = 'goldenCRM';
-      process.env['CONFIG_COMPUTE'] = 'userAPI';
-      process.env['NODE_ENV'] = 'dev';
+      process.env.CONFIG_PLATFORM = 'goldenCRM';
+      process.env.CONFIG_COMPUTE = 'userAPI';
+      process.env.NODE_ENV = 'dev';
 
       expect(() => config.get('primiObjProperty')).to.throw(
-        `Property 'primiObjProperty' resolves to a primitive and an object which can not be merged`,
+        "Property 'primiObjProperty' resolves to a primitive and an object which can not be merged",
       );
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
     });
   });
 
   describe('config get primitive using multiple files', async () => {
-    let config = new Config();
+    const config = new Config();
     await config.addSource(new EnvironmentSource());
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-layer-01.ts`));
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-empty.ts`));
     await config.addSource(new FileSource(`${__dirname}/test-files/config-get/config-layer-02.ts`));
 
     it('should get serviceContext', () => {
-      process.env['CONFIG_PLATFORM'] = 'goldenCRM';
-      process.env['CONFIG_COMPUTE'] = 'userAPI';
-      process.env['NODE_ENV'] = 'dev';
+      process.env.CONFIG_PLATFORM = 'goldenCRM';
+      process.env.CONFIG_COMPUTE = 'userAPI';
+      process.env.NODE_ENV = 'dev';
 
-      const serviceContext = config.get('serviceContext.shareShareShare');
       expect(config.get('serviceContext.shareShareShare')).to.equal('_shared._shared._shared2');
       expect(config.get('serviceContext.shareShareShare1')).to.equal('_shared._shared._shared');
       expect(config.get('serviceContext.shareShareShare2')).to.equal('_shared._shared._shared3');
 
       // Cleanup test
-      delete process.env['CONFIG_PLATFORM'];
-      delete process.env['CONFIG_COMPUTE'];
-      delete process.env['NODE_ENV'];
+      delete process.env.CONFIG_PLATFORM;
+      delete process.env.CONFIG_COMPUTE;
+      delete process.env.NODE_ENV;
     });
   });
 });

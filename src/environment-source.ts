@@ -18,7 +18,8 @@ export class EnvironmentSource implements IConfigSource {
       resolve({
         description: 'env',
         data: {
-          // TODO: Verify that 'process' is available (is this being run in a browser?)
+          // TODO: Verify that 'process' is available
+          //       (is this being run in a browser?)
           // TODO: Allow the user to configure the root of the environment.
           //       but notify that this should not be changed if possible.
           // TODO: Allow a user to unflatten the env files so a value like

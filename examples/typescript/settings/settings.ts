@@ -1,5 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-export const settings = {
+export default {
   _shared: {
     _shared: {
       _shared: {

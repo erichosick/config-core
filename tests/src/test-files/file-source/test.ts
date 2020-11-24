@@ -1,4 +1,4 @@
-export const config = {
+export default {
   // For all platforms/whole company
   _shared: {
     // For all compute instances
