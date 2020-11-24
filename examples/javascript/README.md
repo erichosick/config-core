@@ -8,4 +8,7 @@ To run the example:
 $ cd examples/javascript
 $ yarn
 $ node example.js
+# if you have jq installed
+$ node example.js | jq
+
 ```

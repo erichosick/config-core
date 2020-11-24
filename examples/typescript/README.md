@@ -8,4 +8,6 @@ To run the example:
 $ cd examples/typescript
 $ yarn
 $ npx ts-node example.ts
+# if you have jq installed
+$ npx ts-node example.ts | jq
 ```

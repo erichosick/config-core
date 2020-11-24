@@ -11,22 +11,33 @@ const { config, FileSource } = require('config-core');
     console.log(e.message);
   }
 
-  const transports = [
-    new winston.transports.File({ filename: config.get('logging.fileName') }),
-    config.env('NODE_ENV') === 'dev' ? new winston.transports.Console() : undefined,
-  ];
+  const transports = [];
+  transports.push(new winston.transports.File({ filename: config.get('logging.fileName') }));
+  if (config.env('NODE_ENV') === 'dev') {
+    transports.push(new winston.transports.Console());
+  }
+
   const logger = winston.createLogger({
     level: config.get('logging.level'),
     transports,
   });
 
-  logger.log({ level: 'info', message: config.get('databases.userDb.write') });
-  logger.log({ level: 'info', message: config.get('service') });
+  logger.log({ level: 'info', message: `Node Environment is '${config.env('NODE_ENV')}'.` });
+  logger.log({
+    level: 'info',
+    message: 'Write database configuration for userDb database.',
+    data: config.get('databases.userDb.write'),
+  });
+  logger.log({ level: 'info', message: 'Service configuration', data: config.get('service') });
 
   const fileName = `${__dirname}/settings/setting-not-supported.ts`;
   try {
     await config.addSource(new FileSource(fileName));
   } catch (err) {
+    logger.log({
+      level: 'info',
+      message: 'An error will be thrown if you try to load a typescipt settings file using node.',
+    });
     logger.log({ level: 'error', message: `${err.message} in file ${fileName}` });
   }
 })();

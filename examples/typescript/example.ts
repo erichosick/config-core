@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import winston from 'winston';
 import { config, FileSource } from 'config-core';
 
@@ -7,9 +6,11 @@ import { config, FileSource } from 'config-core';
     await config.addSource(new FileSource(`${__dirname}/settings/settings-env.ts`));
     await config.addSource(new FileSource(`${__dirname}/settings/settings.ts`));
   } catch (e) {
-    // loger not setup yet.
+    // loger not setup yet so will log to console.
+    /* eslint-disable no-console */
     console.log(e.message);
   }
+
   const transports = [];
   transports.push(new winston.transports.File({ filename: config.get('logging.fileName') }));
   if (config.env('NODE_ENV') === 'dev') {
@@ -21,7 +22,11 @@ import { config, FileSource } from 'config-core';
     transports,
   });
 
-  logger.log({ level: 'info', message: config.env('NODE_ENV') });
-  logger.log({ level: 'info', message: config.get('databases.userDb.write') });
-  logger.log({ level: 'info', message: config.get('service') });
+  logger.log({ level: 'info', message: `Node Environment is '${config.env('NODE_ENV')}'.` });
+  logger.log({
+    level: 'info',
+    message: 'Write database configuration for userDb database.',
+    data: config.get('databases.userDb.write'),
+  });
+  logger.log({ level: 'info', message: 'Service configuration', data: config.get('service') });
 })();
